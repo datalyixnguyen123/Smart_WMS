@@ -35,7 +35,7 @@ COMMENT ON COLUMN LOCATION.is_pickable IS 'Checks if the cell allows for direct 
 COMMENT ON COLUMN LOCATION.is_putaway IS 'Checks if the cell allows the recommendation algorithm to stock items';
 COMMENT ON COLUMN LOCATION.version IS 'Prevents configuration data conflicts in the repository';
 
-//*
+
 
 CREATE TABLE PRODUCT (product_id uuid NOT NULL, product_code varchar(50) NOT NULL UNIQUE, category_id uuid NOT NULL, brand_id uuid NOT NULL, product_name varchar(255) NOT NULL, country_of_origin varchar(100) NOT NULL, manufacturer varchar(100) NOT NULL, hs_code varchar(50), product_status varchar(30) NOT NULL, image_url text, shelf_life_days int4, created_at timestamp with timezone NOT NULL DEFAULT CURRENT_TIMESTAMP, created_by varchar(50), updated_at timestamp with timezone DEFAULT CURRENT_TIMESTAMP, updated_by varchar(50), PRIMARY KEY (product_id), CONSTRAINT chk_PRODUCT_product_status CHECK(product_status IN ('ACTIVE', 'INACTIVE', 'DISCONTINUED')), CONSTRAINT chk_PRODUCT_shelf_life_days CHECK(shelf_life_days >= 0));
 COMMENT ON COLUMN PRODUCT.image_url IS 'stores file path(image path, users avatar, etc)';
@@ -53,7 +53,7 @@ COMMENT ON COLUMN PRODUCT_CATEGORY.description IS 'category description';
 COMMENT ON COLUMN PRODUCT_CATEGORY.category_status IS 'ACTIVE, INACTIVE';
 COMMENT ON COLUMN PRODUCT_CATEGORY.version IS 'Optimistic Locking';
 
-//*
+
 CREATE TABLE SKU (sku_id uuid NOT NULL, product_id uuid NOT NULL, sku_code varchar(50) NOT NULL UNIQUE, sku_name varchar(255) NOT NULL, barcode varchar(50) UNIQUE, base_uom_id uuid NOT NULL, policy_id uuid NOT NULL, constraint_id uuid NOT NULL, sku_length numeric(10, 3), sku_width numeric(10, 3), sku_height numeric(10, 3), sku_weight numeric(10, 3), sku_volume numeric(10, 3), SKU_status varchar(30) DEFAULT 'ACTIVE' NOT NULL, packaging_material varchar(50), tie int4, high int4, stacking_limit int4, is_fragile bool DEFAULT FALSE NOT NULL, is_hazardous bool DEFAULT FALSE NOT NULL, packaging_level varchar(30), created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, created_by varchar(50), updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_by varchar(50), abc_code varchar(10), velocity_code varchar(10), version int4 DEFAULT 0 NOT NULL, PRIMARY KEY (sku_id), CONSTRAINT chk_SKU_packaging_level CHECK (packaging_level IN ('BASE_UNIT', 'INNER_PACK', 'CASE', 'PALLET', 'DISPLAY')), CONSTRAINT chk_SKU_version CHECK (version >= 0), CONSTRAINT chk_SKU_tie CHECK (tie IS NULL OR tie > 0), CONSTRAINT chk_SKU_SKU_status CHECK (SKU_status IN ('ACTIVE', 'INACTIVE', 'DISCONTINUED') ), CONSTRAINT chk_SKU_high CHECK (high IS NULL OR high > 0), CONSTRAINT chk_SKU_stacking_limit CHECK (stacking_limit IS NULL OR stacking_limit >= 0), 
 CONSTRAINT chk_SKU_dimension 
 	CHECK
