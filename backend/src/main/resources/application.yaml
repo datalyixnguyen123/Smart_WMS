@@ -1,0 +1,21 @@
+
+spring:
+  application:
+    name: Smart_WMS
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wms_db
+    username: postgres
+    password: datnguyen@161027
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+

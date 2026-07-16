@@ -1,0 +1,187 @@
+
+Master Data
+
+├── Warehouse Structure
+
+│ ├── Warehouse
+
+│ ├── Zone
+
+│ ├── Aisle
+
+│ ├── Rack
+
+│ ├── Shelf
+
+│ ├── Bin
+
+│
+
+├── Product
+
+│ ├── Product
+
+│ ├── SKU
+
+│ ├── Category
+
+│ ├── Brand
+
+│ ├── UOM
+
+│ ├── UOM Conversion
+
+│
+
+├── Business Partner
+
+│ ├── Supplier: supplier_id, supplier_name, lead time, minimum order quatity, priority, contract number...
+
+│ ├── Customer: customer_id, customer_name, priority,....
+
+│ ├── Carrier: carrier_id, carrier_name,....
+
+│
+
+├── Storage Configuration
+
+│ ├── Storage Policy
+
+│ ├── Storage Constraint
+
+│ ├── Location Profile
+
+├── Equipment
+
+└── Configuration: Key-Value
+
+
+Inventory Management Domain
+
+├── InventoryBalance
+
+├── InventoryTransaction
+
+├── Lot
+
+├── LPN
+
+├── InventoryReservation
+
+├── InventoryAdjustment
+
+├── InventoryTransfer
+
+├── InventorySnapshot
+
+├── CycleCount
+
+├── CycleCountDetail
+
+├── InventoryStatus
+
+└── ReplenishmentRule 
+
+
+Inbound Domain
+Inbound
+│
+├── 1. Order Management
+│     ├── PurchaseOrder
+│     ├── PurchaseOrderLine
+│     ├── ASN (Advanced Shipping Notice)
+│     └── DockAppointment
+│
+├── 2. Receiving
+│     ├── GoodsReceipt
+│     ├── GoodsReceiptLine
+│     ├── ReceivingTask
+│     └── ReceivingException
+│
+├── 3. Quality Control
+│     ├── QCInspection
+│     ├── QCInspectionResult
+│     ├── QCDisposition
+│     └── QCRule
+│
+├── 4. Putaway
+│     ├── PutawayTask
+│     ├── PutawayTaskDetail
+│     ├── PutawayStrategy
+│     └── PutawayException
+│
+├── 5. Replenishment (Optional)
+│     ├── ReplenishmentRequest
+│     ├── ReplenishmentTask
+│     └── ReplenishmentRule
+│
+├── 6. Exception
+│     ├── DamagedReceipt
+│     ├── ShortReceipt
+│     ├── OverReceipt
+│     ├── ReturnToSupplier
+│     └── ReceivingDiscrepancy
+│
+└── 7. Domain Events
+      ├── ASNReceived
+      ├── TruckArrived
+      ├── GoodsReceived
+      ├── QCCompleted
+      ├── PutawayCompleted
+      └── InventoryAvailable
+
+
+Outbound Domain
+Outbound
+│
+├── 1. Order Management
+│     ├── SalesOrder
+│     ├── SalesOrderLine
+│     ├── OrderPriority
+│     └── OrderSource
+│
+├── 2. Allocation
+│     ├── InventoryReservation
+│     ├── AllocationRule
+│     └── AllocationResult
+│
+├── 3. Wave Planning
+│     ├── Wave
+│     ├── WaveDetail
+│     └── WaveStrategy
+│
+├── 4. Picking
+│     ├── PickTask
+│     ├── PickTaskDetail
+│     ├── PickRoute
+│     └── PickException
+│
+├── 5. Packing
+│     ├── PackingTask
+│     ├── Package
+│     ├── PackageItem
+│     └── PackingStation
+│
+├── 6. Shipping
+│     ├── OutboundDelivery
+│     ├── Shipment
+│     ├── LoadingTask
+│     ├── CarrierAssignment
+│     └── ShippingLabel
+│
+├── 7. Exception
+│     ├── ShortPick
+│     ├── CancelShipment
+│     ├── ReturnToStock
+│     └── DeliveryException
+│
+└── 8. Domain Events
+      ├── OrderAllocated
+      ├── WaveCreated
+      ├── PickCompleted
+      ├── PackageCompleted
+      ├── ShipmentConfirmed
+      └── OrderShipped
+
+
+
