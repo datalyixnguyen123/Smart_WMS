@@ -138,7 +138,7 @@ ALTER TABLE SKU ADD CONSTRAINT "fk_sku_velocity_code" FOREIGN KEY(velocity_code)
 
 ALTER TABLE SKU_supplier ADD CONSTRAINT "fk_sku_supplier_partner_id" FOREIGN KEY(partner_id)REFERENCES BUSINESS_PARTNER(partner_id);
 ALTER TABLE SKU_supplier ADD CONSTRAINT "fk_sku_supplier_id" FOREIGN KEY(sku_id)REFERENCES SKU(sku_id);
-ALTER TABLE SKU_supplier ADD CONSTRAINT uk_sku_supplier_sku_partner UNIQUE (sku_id, partner_id);
+ALTER TABLE SKU_supplier ADD CONSTRAINT "uk_sku_supplier_sku_partner" UNIQUE (sku_id, partner_id);
 
 ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "fk_uom_from_uom_id" FOREIGN KEY(from_uom_id) REFERENCES Unit_Of_Measure(uom_id);
 ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "fk_uom_to_uom_id" FOREIGN KEY(to_uom_id) REFERENCES Unit_Of_Measure(uom_id);
@@ -152,12 +152,12 @@ ALTER TABLE PRODUCT_CATEGORY ADD CONSTRAINT "fk_product_category_parent" FOREIGN
 
 ALTER TABLE EQUIPMENT ADD CONSTRAINT "fk_equipment_zone_id" FOREIGN KEY(zone_id)REFERENCES ZONE(zone_id);
 
-ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT uk_attribute_option UNIQUE (attribute_id, option_code);
-ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT uk_attribute_display_name UNIQUE(attribute_id, display_name);
-ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT fk_option_attribute_id FOREIGN KEY(attribute_id) REFERENCES ATTRIBUTE(attribute_id);
+ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "uk_attribute_option" UNIQUE (attribute_id, option_code);
+ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "uk_attribute_display_name" UNIQUE(attribute_id, display_name);
+ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "fk_option_attribute_id" FOREIGN KEY(attribute_id) REFERENCES ATTRIBUTE(attribute_id);
 
-ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT fk_sku_attribute_sku_id FOREIGN KEY(sku_id) REFERENCES SKU(sku_id);
-ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT fk_sku_attribute_attribute_id FOREIGN KEY(attribute_id) REFERENCES ATTRIBUTE(attribute_id);
-ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT fk_sku_attribute_attribute_option_id FOREIGN KEY(attribute_option_id) REFERENCES ATTRIBUTE_OPTION(option_id);
-ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT uk_sku_attribute UNIQUE(sku_id, attribute_id);
+ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT "fk_sku_attribute_sku_id" FOREIGN KEY(sku_id) REFERENCES SKU(sku_id);
+ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT "fk_sku_attribute_attribute_id" FOREIGN KEY(attribute_id) REFERENCES ATTRIBUTE(attribute_id);
+ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT "fk_sku_attribute_attribute_option_id" FOREIGN KEY(attribute_option_id) REFERENCES ATTRIBUTE_OPTION(option_id);
+ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT "uk_sku_attribute" UNIQUE(sku_id, attribute_id);
 
