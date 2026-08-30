@@ -1,4 +1,6 @@
 
+// Ctrl + Shift + V to open Markdown Preview
+
 # Project Overview
 ## **Smart Warehouse Management System** 
 ## 1. Introduction

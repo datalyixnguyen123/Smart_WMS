@@ -26,13 +26,13 @@ COMMENT ON COLUMN LOCATION.capacity_volume IS 'The maximum volume of the current
 COMMENT ON COLUMN LOCATION.capacity_weight IS 'The maximum load capacity of the cell(unit: kg)';
 COMMENT ON COLUMN LOCATION.occupied_volume IS 'The current volume occupied by the item';
 COMMENT ON COLUMN LOCATION.occupied_weight IS 'The current weight occupied by the item';
-COMMENT ON COLUMN LOCATION.is_pickable IS 'Checks if the cell allows direct pickups';
+COMMENT ON COLUMN LOCATION.is_pickable IS 'Checks if the cell allows for direct pickup';
 COMMENT ON COLUMN LOCATION.is_putaway IS 'Checks if the cell allows the recommendation algorithm to stock items';
 COMMENT ON COLUMN LOCATION.version IS 'Prevents configuration data conflicts in the repository';
 
 
 CREATE TABLE PRODUCT (product_id uuid NOT NULL, product_code varchar(50) NOT NULL UNIQUE, category_id uuid NOT NULL, brand_id uuid, product_name varchar(255) NOT NULL, country_of_origin varchar(100) NOT NULL, manufacturer varchar(100) NOT NULL, hs_code varchar(50), product_status varchar(30) DEFAULT 'ACTIVE' NOT NULL, image_url text, shelf_life_days int4, created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, created_by varchar(50), updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP, updated_by varchar(50), version int4 NOT NULL DEFAULT 0, PRIMARY KEY (product_id), CONSTRAINT chk_PRODUCT_product_status CHECK(product_status IN ('ACTIVE', 'INACTIVE', 'DISCONTINUED')), CONSTRAINT chk_PRODUCT_shelf_life_days CHECK(shelf_life_days >= 0));
-COMMENT ON COLUMN PRODUCT.image_url IS 'contains file path(image path, users avatar, etc)';
+COMMENT ON COLUMN PRODUCT.image_url IS 'stores file path(image path, users avatar, etc)';
 
 
 CREATE TABLE PRODUCT_BRAND (brand_id uuid NOT NULL, brand_code varchar(50) NOT NULL UNIQUE, brand_name varchar(255) NOT NULL, logo_url text, website_url text, description text, is_active bool DEFAULT 'TRUE' NOT NULL, created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, version int4 NOT NULL DEFAULT 0, PRIMARY KEY (brand_id), CONSTRAINT chk_BRAND_version CHECK (version >= 0));
@@ -175,4 +175,3 @@ ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT fk_sku_attribute_sku_id FOREIGN KEY(sku
 ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT fk_sku_attribute_attribute_id FOREIGN KEY(attribute_id) REFERENCES ATTRIBUTE(attribute_id);
 ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT fk_sku_attribute_attribute_option_id FOREIGN KEY(attribute_option_id) REFERENCES ATTRIBUTE_OPTION(option_id);
 ALTER TABLE SKU_ATTRIBUTE ADD CONSTRAINT uk_sku_attribute UNIQUE(sku_id, attribute_id);
-

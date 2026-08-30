@@ -1,6 +1,4 @@
 
-SET search_path TO inventory, master, public;
-
 CREATE TABLE INVENTORY_BALANCE(balance_id uuid NOT NULL, warehouse_id uuid NOT NULL, location_id uuid NOT NULL, sku_id uuid NOT NULL, lot_id uuid, lpn_id uuid, quantity_on_hand numeric(12, 4) DEFAULT 0 NOT NULL, quantity_allocated numeric(12, 4) DEFAULT 0 NOT NULL, quantity_picked numeric(12, 4) DEFAULT 0 NOT NULL, quantity_in_transit numeric(12, 4) DEFAULT 0 NOT NULL, quantity_hold numeric(12, 4) DEFAULT 0 NOT NULL, quantity_damaged numeric(12, 4) DEFAULT 0 NOT NULL, quantity_blocked numeric(12, 4) DEFAULT 0 NOT NULL, inventory_status varchar(30) NOT NULL, received_date date, last_movement_date date, created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, created_by varchar(50), updated_by varchar(50), version int4 NOT NULL DEFAULT 0, PRIMARY KEY (balance_id),
 CONSTRAINT chk_balance_status CHECK (inventory_status IN ('AVAILABLE', 'HOLD', 'QC', 'DAMAGED', 'RETURN', 'BLOCKED', 'EXPIRED')),
 CONSTRAINT chk_balance_states CHECK (quantity_on_hand >= quantity_allocated + quantity_picked + quantity_hold + quantity_damaged),
@@ -205,5 +203,9 @@ CREATE INDEX "idx_inventory_snapshot_warehouse_date" ON INVENTORY_SNAPSHOT(wareh
 
 CREATE INDEX "idx_inventory_reservation_ref_active" ON INVENTORY_RESERVATION(reference_doc_id)
 WHERE reservation_status = 'ACTIVE';
+
+
+
+
 
 
