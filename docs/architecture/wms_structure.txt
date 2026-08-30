@@ -1,7 +1,5 @@
 
-Master Data
-
-├── Warehouse Structure
+Master Domain
 
 │ ├── Warehouse
 
@@ -15,7 +13,6 @@ Master Data
 
 │ ├── Bin
 
-│
 
 ├── Product
 
@@ -31,17 +28,9 @@ Master Data
 
 │ ├── UOM Conversion
 
-│
+
 
 ├── Business Partner
-
-│ ├── Supplier: supplier_id, supplier_name, lead time, minimum order quatity, priority, contract number...
-
-│ ├── Customer: customer_id, customer_name, priority,....
-
-│ ├── Carrier: carrier_id, carrier_name,....
-
-│
 
 ├── Storage Configuration
 
@@ -49,11 +38,8 @@ Master Data
 
 │ ├── Storage Constraint
 
-│ ├── Location Profile
 
 ├── Equipment
-
-└── Configuration: Key-Value
 
 
 Inventory Management Domain
@@ -78,14 +64,11 @@ Inventory Management Domain
 
 ├── CycleCountDetail
 
-├── InventoryStatus
-
 └── ReplenishmentRule 
 
 
 Inbound Domain
-Inbound
-│
+
 ├── 1. Order Management
 │     ├── PurchaseOrder
 │     ├── PurchaseOrderLine
