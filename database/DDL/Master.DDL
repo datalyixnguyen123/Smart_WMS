@@ -124,7 +124,7 @@ CONSTRAINT chk_abc_version CHECK (version >= 0)
 CREATE TABLE VELOCITY_CLASS (velocity_code varchar(20) PRIMARY KEY, display_name varchar(50) NOT NULL, description text, min_daily_pick numeric(10,2), max_daily_pick numeric(10,2), min_monthly_pick numeric(10,2), max_monthly_pick numeric(10,2), priority smallint NOT NULL, color_code varchar(20), replenishment_trigger_percentage numeric(5,2), is_active bool NOT NULL DEFAULT 'TRUE', created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP, version int4 NOT NULL DEFAULT 0, CONSTRAINT chk_velocity_priority CHECK (priority > 0), CONSTRAINT chk_velocity_daily_pick CHECK ((min_daily_pick IS NULL OR min_daily_pick >= 0) AND (max_daily_pick IS NULL OR max_daily_pick >= 0) AND (min_daily_pick <= max_daily_pick)), CONSTRAINT chk_velocity_monthly_pick CHECK((min_monthly_pick IS NULL OR min_monthly_pick >= 0) AND (max_monthly_pick IS NULL OR max_monthly_pick >= 0) AND (min_monthly_pick<=max_monthly_pick)), CONSTRAINT chk_velocity_replenishment_trigger CHECK(replenishment_trigger_percentage IS NULL OR (replenishment_trigger_percentage >= 0 AND replenishment_trigger_percentage <= 100)));
 
 ALTER TABLE ZONE ADD CONSTRAINT "fk_zone_warehouse_id" FOREIGN KEY(warehouse_id) REFERENCES WAREHOUSE(warehouse_id);
-ALTER TABLE ZONE ADD CONSTRAINT "fk_zone_constraint_id" FOREIGN KEY(constraint_id)REFERENCES STORAGE_CONSTRAINT(constraint_id);
+ALTER TABLE ZONE ADD CONSTRAINT "fk_zone_constraint_id" FOREIGN KEY(constraint_id) REFERENCES STORAGE_CONSTRAINT(constraint_id);
 ALTER TABLE ZONE ADD CONSTRAINT "uk_zone_warehouse_code" UNIQUE(warehouse_id, zone_code);
 
 ALTER TABLE LOCATION ADD CONSTRAINT "fk_location_zone_id" FOREIGN KEY(zone_id) REFERENCES ZONE(zone_id);
@@ -137,12 +137,12 @@ ALTER TABLE SKU ADD CONSTRAINT "fk_sku_abc_code" FOREIGN KEY(abc_code) REFERENCE
 ALTER TABLE SKU ADD CONSTRAINT "fk_sku_velocity_code" FOREIGN KEY(velocity_code) REFERENCES VELOCITY_CLASS(velocity_code);
 
 ALTER TABLE SKU_supplier ADD CONSTRAINT "fk_sku_supplier_partner_id" FOREIGN KEY(partner_id)REFERENCES BUSINESS_PARTNER(partner_id);
-ALTER TABLE SKU_supplier ADD CONSTRAINT "fk_sku_supplier_id" FOREIGN KEY(sku_id)REFERENCES SKU(sku_id);
-ALTER TABLE SKU_supplier ADD CONSTRAINT "uk_sku_supplier_sku_partner" UNIQUE (sku_id, partner_id);
+ALTER TABLE SKU_supplier ADD CONSTRAINT "fk_sku_supplier_id" FOREIGN KEY(sku_id) REFERENCES SKU(sku_id);
+ALTER TABLE SKU_supplier ADD CONSTRAINT "uk_sku_supplier_sku_partner" UNIQUE(sku_id, partner_id);
 
 ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "fk_uom_from_uom_id" FOREIGN KEY(from_uom_id) REFERENCES Unit_Of_Measure(uom_id);
 ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "fk_uom_to_uom_id" FOREIGN KEY(to_uom_id) REFERENCES Unit_Of_Measure(uom_id);
-ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "fk_uom_conversion_sku_id" FOREIGN KEY(sku_id)REFERENCES SKU(sku_id);
+ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "fk_uom_conversion_sku_id" FOREIGN KEY(sku_id) REFERENCES SKU(sku_id);
 ALTER TABLE Unit_Of_Measure_Conversion ADD CONSTRAINT "uk_uom_conversion" UNIQUE(sku_id, from_uom_id, to_uom_id);
 
 ALTER TABLE PRODUCT ADD CONSTRAINT "fk_product_brand_id" FOREIGN KEY(brand_id)REFERENCES PRODUCT_BRAND(brand_id);
@@ -150,9 +150,9 @@ ALTER TABLE PRODUCT ADD CONSTRAINT "fk_product_category_id" FOREIGN KEY(category
 
 ALTER TABLE PRODUCT_CATEGORY ADD CONSTRAINT "fk_product_category_parent" FOREIGN KEY(parent_category_id) REFERENCES PRODUCT_CATEGORY(category_id);
 
-ALTER TABLE EQUIPMENT ADD CONSTRAINT "fk_equipment_zone_id" FOREIGN KEY(zone_id)REFERENCES ZONE(zone_id);
+ALTER TABLE EQUIPMENT ADD CONSTRAINT "fk_equipment_zone_id" FOREIGN KEY(zone_id) REFERENCES ZONE(zone_id);
 
-ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "uk_attribute_option" UNIQUE (attribute_id, option_code);
+ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "uk_attribute_option" UNIQUE(attribute_id, option_code);
 ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "uk_attribute_display_name" UNIQUE(attribute_id, display_name);
 ALTER TABLE ATTRIBUTE_OPTION ADD CONSTRAINT "fk_option_attribute_id" FOREIGN KEY(attribute_id) REFERENCES ATTRIBUTE(attribute_id);
 
