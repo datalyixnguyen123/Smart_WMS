@@ -1,7 +1,7 @@
 
 // Date created: 2026-08-16
 // technical audits (created_at, updated_at, version)
-package com.datnguyen.smartwms.entity;
+package com.datnguyen.smartwms.entity.base;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 
 // auditable entities(created_by, updated_by etc.)
-package com.datnguyen.smartwms.entity;
+package com.datnguyen.smartwms.entity.base;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

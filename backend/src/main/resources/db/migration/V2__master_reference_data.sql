@@ -2,7 +2,6 @@
 -- Date created: 2026-08-15
 -- Author: Dat Nguyen
 
--- Lower value indicates higher operational priority
 INSERT INTO master.Unit_Of_Measure(uom_id, uom_code, uom_name, uom_type, symbol, decimal_places)
 VALUES
     ('10000000-0000-0000-0000-000000000001', 'PCS', 'Piece', 'QUANTITY', 'pcs', 0),
@@ -24,7 +23,7 @@ VALUES
 
 ON CONFLICT (uom_id) DO NOTHING;
 
-
+-- Lower value indicates higher operational priority
 INSERT INTO master.ABC_CLASS(abc_code, display_name, description, min_percentage, max_percentage, priority, color_code, cycle_count_frequency_days, target_service_level, max_pick_distance)
 VALUES
       (
@@ -32,19 +31,16 @@ VALUES
           0.00, 80.00, 1, '#FF4D4F',
           30, 99.00, 50
       ),
-
       (
           'CLASS_B', 'Class B - Medium Value', 'Items contributing to 80%-95% of cumulative transaction value.',
           80.00, 95.00, 2, '#FFA940',
           90, 95.00, 150
       ),
-
       (
           'CLASS_C', 'Class C - Low Value/Slow Moving', 'Items contributing to the remaining 5% of cumulative transaction value.',
           95.00, 100.00, 3, '#73D13D',
           180, 90.00, 300
       )
-
     ON CONFLICT (abc_code) DO NOTHING;
 
 

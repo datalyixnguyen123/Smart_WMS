@@ -2,7 +2,9 @@
 // Date created: 2026-08-22
 // Author: Dat Nguyen
 
-package com.datnguyen.smartwms.entity;
+package com.datnguyen.smartwms.entity.product;
+import com.datnguyen.smartwms.entity.partner.BusinessPartner;
+import com.datnguyen.smartwms.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
