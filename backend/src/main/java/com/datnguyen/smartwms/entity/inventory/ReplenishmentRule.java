@@ -126,7 +126,7 @@ public class ReplenishmentRule extends BaseEntity {
     @AssertTrue(message = "Min quantity must be < max quantity!")
     public boolean isQuantityRangeValid() {
         if (minQuantity == null || maxQuantity == null) return true;
-        return maxQuantity.compareTo(minQuantity) > 0;
+        return minQuantity.compareTo(maxQuantity) < 0;
     }
 
     @AssertTrue(message = "Target percentage must be greater than trigger percentage!")

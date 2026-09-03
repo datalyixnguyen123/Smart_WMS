@@ -6,7 +6,7 @@ CONSTRAINT chk_balance_version CHECK (version >= 0),
 CONSTRAINT chk_balance_rules CHECK (quantity_on_hand >= 0 AND quantity_allocated >= 0 AND quantity_picked >= 0 AND quantity_in_transit >= 0 AND quantity_hold >= 0 AND quantity_damaged >= 0 AND quantity_blocked >= 0),
 CONSTRAINT chk_balance_quantity CHECK (quantity_on_hand >= quantity_allocated)
 );
-COMMENT ON COLUMN INVENTORY_BALANCE.quantity_on_hand IS ' The quantity of items located on the shelf at the moment.';
+COMMENT ON COLUMN INVENTORY_BALANCE.quantity_on_hand IS 'The quantity of items located on the shelf at the moment.';
 COMMENT ON COLUMN INVENTORY_BALANCE.quantity_allocated IS 'The quantity "locked" or reserved by the system for picking against outbound orders.';
 COMMENT ON COLUMN INVENTORY_BALANCE.inventory_status IS 'Decide whether the items are permitted to be taken away for sale or exporting.';
 
@@ -48,7 +48,7 @@ CONSTRAINT chk_reservation_status CHECK (reservation_status IN ('ACTIVE', 'RELEA
 COMMENT ON COLUMN INVENTORY_RESERVATION.location_id IS 'The specific bin/rack where the stock is held (set to NULL if held at the central warehouse level).';
 COMMENT ON COLUMN INVENTORY_RESERVATION.reference_doc_id IS 'Order ID or warehouse transfer ID for reconciliation purposes.';
 COMMENT ON COLUMN INVENTORY_RESERVATION.reserved_at IS 'The time at which the hold order takes effect.';
-COMMENT ON COLUMN INVENTORY_RESERVATION.expires_at IS 'Stock reservation expiration time ';
+COMMENT ON COLUMN INVENTORY_RESERVATION.expires_at IS 'Stock reservation expiration time';
 
 CREATE TABLE DISCREPANCY_REASON(reason_id uuid NOT NULL, reason_code varchar(50) NOT NULL UNIQUE, reason_name varchar(100) NOT NULL, description text, is_active bool DEFAULT 'TRUE' NOT NULL, created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP, version int4 NOT NULL DEFAULT 0, PRIMARY KEY (reason_id));
 
@@ -211,7 +211,6 @@ CREATE INDEX "idx_inventory_reservation_ref_active" ON INVENTORY_RESERVATION(ref
 WHERE reservation_status = 'ACTIVE';
 
 CREATE INDEX "idx_inventory_transfer_detail_transfer" ON INVENTORY_TRANSFER_DETAIL(transfer_id);
-
 
 
 
